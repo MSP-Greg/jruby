@@ -9,10 +9,11 @@ jobs:
 
   # Maven test suites that pass on both Java 8 and 11
   maven-test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       matrix:
+        os: [ ubuntu-18.04, ubuntu-20.04 ]
         java-version: [8, 11]
       fail-fast: false
 
@@ -107,4 +108,3 @@ jobs:
         run: tool/maven-ci-script.sh
         env:
           PHASE: '-Pmain -Dinvoker.test=GH-6081* integration-test'
-
